@@ -1,0 +1,24 @@
+/* 
+* @Author: Ron Chen
+* @Date:   2016-02-17 17:53:15
+* @Last Modified by:   Ron Chen
+* @Last Modified time: 2016-02-18 11:09:39
+*/
+
+.scoremark{
+	margin:2px 0 0 0;
+	border-left:1px solid #eaeaea;
+	color:#9b9b9b;
+}
+
+
+/*文件批量上传的样式*/
+.dropzone {
+    position: relative;
+    padding: 1em;
+    min-height: 360px;
+    border: 2px dashed #0087F7;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: rgba(0,0,0,.02);
+}

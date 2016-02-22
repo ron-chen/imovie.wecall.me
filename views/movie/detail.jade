@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			.col-md-8
+				h1 #{movie.name}
+				.row
+					.col-md-3
+						a(href="",title="点击看更多海报")
+							//- img(src="#{movie.stills}",title="点击看更多海报",alt="#{movie.name}",rel="v:image")
+					.col-md-5
+						strong 导演:
+						span #{movie.directors} 
+						br
+						strong 编剧:
+						span #{movie.writers} 
+						br
+						strong 主演:
+						span #{movie.actors} 
+						br
+						strong 制片国家/地区:
+						span #{movie.country}
+						br
+						strong 语言:
+						span #{movie.language}
+						br
+						strong 上映日期:
+						span #{movie.showDate}
+						br
+						strong 片长: 
+						span #{movie.duration}
+						br
+						strong 又名:
+						span #{movie.alias}
+						br
+
+					.col-md-4.scoremark
+						strong 豆瓣评分
+						span #{movie.score}
+						br
+						strong 网友评分
+						span #{movie.score}
+						br
+			.col-md-4

@@ -1,0 +1,115 @@
+extends ../layoutAdmin
+
+block content
+	.container
+		form#movieForm(method="post",action="/admin/movie/new")
+			input(type="hidden",name="movie[_id]",value="#{movie._id}").form-control
+			//- 影片分类
+			fieldset
+				.form-group
+					.row
+						.col-md-8
+							label.control-label 影片名称
+							input(type="text",name="movie[name]",value="#{movie.name}").form-control
+						.col-md-4
+							label.control-label 影片类型
+							select.form-control(name="movie[type]",multiple="multiple",id="seltype")
+								option(value="1") 爱情
+								option(value="2") 动作
+								option(value="3") 科幻
+			//- 涉及演员
+			fieldset
+				.form-group
+					.row
+						.col-sm-12.col-md-6
+							label.control-label 导演
+							input(type="text",name="movie[directors]",value="#{movie.directors}").form-control
+						.col-sm-12.col-md-6
+							label.control-label 编剧
+							input(type="text",name="movie[writers]",value="#{movie.writers}").form-control
+					.row
+						.col-sm-12
+							label.control-label 主演
+							input(type="text",name="movie[actors]",value="#{movie.actors}").form-control
+			//- 影片格式
+			fieldset
+				.form-group
+					.row
+						.col-sm-12.col-md-4
+							label.control-label 制片国家/地区:
+							select.form-control(name="movie[country]",id="selcountry")
+								
+						.col-sm-12.col-md-4
+							label.control-label 语言
+							select.form-control(name="movie[language]")
+								option(value="0") 请选择
+								option(value="cn") 国语
+								option(value="en") 英语 
+								option(value="hk") 粤语
+
+						.col-sm-12.col-md-4
+							label.control-label 影片格式
+							select.form-control(name="movie[formats]",multiple="multiple",id="selformat")
+								option(value="2d") 2D
+								option(value="3d") 3D
+								option(value="imax") IMAX
+								option(value="byte") 杜比特
+			//- 基本其他信息
+			fieldset
+				.form-group
+					.row
+						.col-sm-12.col-md-4
+							label.control-label 影片时长:
+							input(type="text",name="movie[duration]",value="#{movie.duration}").form-control
+
+						.col-sm-12.col-md-4
+							label.control-label 上映日期:
+							input(type="text",name="movie[showDate]",value="#{movie.showDate}").form-control
+
+						.col-sm-12.col-md-4
+							label.control-label 又名:
+							input(type="text",name="movie[alias]",value="#{movie.alias}").form-control
+			//- 图片上传
+			fieldset
+				.form-group
+					.row
+						.col-sm-12
+							label.control-label 海报(可上传多张):
+							div.dropzone#stilldropzone
+			script(src="/js/filedropzone.js")
+			//- 视频上传
+			fieldset
+				.form-group
+					.row
+						.col-sm-12
+							label.control-label 预告片:
+							input(type="file",name="movie[prevueVideo]",value="#{movie.prevueVideo}").form-control
+			
+			fieldset
+				.form-group
+					.row
+						.col-sm-12
+							label.control-label 宣传口号:
+							input(type="text",name="movie[summary]",value="#{movie.summary}").form-control
+					.row
+						.col-sm-12
+							label.control-label 剧情:
+							textarea(placeholder="影片相关故事",rows="4",name="movie[story]",value="#{movie.story}").form-control
+					.row
+						.col-sm-12
+							label.control-label 简介:
+							textarea(placeholder="影片背景介绍",rows="4",name="movie[introduction]",value="#{movie.introduction}").form-control
+			//- 评分
+			fieldset
+				.form-group
+					.row
+						.col-sm-12
+							label.control-label 豆瓣评分:
+							input(type="text",name="movie[score]",value="#{movie.score}").form-control
+			.form-actions
+				.row
+					.col-sm-12
+						button(type="submit").btn.btn-default 确认添加
+
+					
+

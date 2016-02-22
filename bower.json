@@ -1,0 +1,30 @@
+{
+  "name": "www.imovie.com",
+  "description": "属于自己的电影网站",
+  "main": "app.js",
+  "authors": [
+    "ronchen"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "电影",
+    "movie",
+    "票房"
+  ],
+  "moduleType": [],
+  "homepage": "www.ronchen.me",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "select2": "^4.0.1",
+    "bootstrapvalidator": "bootstrapValidator#^0.5.3"
+  }
+}
