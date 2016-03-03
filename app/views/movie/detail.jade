@@ -1,0 +1,89 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			.col-md-8
+				h1 #{movie.name}
+				.row
+					.col-md-3
+						a(href="",title="点击看更多海报")
+							img(src="#{movie.stills.key}",title="点击看更多海报",alt="#{movie.name}")
+					.col-md-5
+						strong 导演:
+						span #{movie.directors} 
+						br
+						strong 编剧:
+						span #{movie.writers} 
+						br
+						strong 主演:
+						span #{movie.actors} 
+						br
+						strong 分类:
+						span #{strcategary}
+						br
+						strong 制片国家/地区:
+						span #{strcountry}
+						br
+						strong 语言:
+						span #{strlanguage}
+						br
+						strong 上映日期:
+						span #{movie.showDate}
+						br
+						strong 片长: 
+						span #{movie.duration}
+						br
+						strong 又名:
+						span #{movie.alias}
+						br
+
+					.col-md-4.scoremark
+						strong 豆瓣评分:
+						span #{movie.score} 分
+						br
+						strong 浏览量:
+						span #{movie.pvcount}
+						br
+				//- 评论信息
+				.panel.panel-default
+					.panel-header
+						h3 评论区
+					.panel-body
+						ul.media-list
+							each item in comments
+								li.media
+									.pull-left
+										a.comment(href="#commentsform",data-cid='#{item._id}',data-tid='#{item.from._id}')
+											img(src='',width="30",height="30")
+									.media-body
+										h4.media-heading #{item.from.name}
+										p #{item.content}
+										if item.reply && item.reply.length > 0 
+											ul.media-list
+												each replyrow in item.reply
+													li.media
+														.pull-left
+															a.comment(href="#commentsform",data-cid='#{item._id}',data-tid='#{replyrow.from._id}')
+																img(src='',width="30",height="30")
+														.media-body
+															h4.media-heading #{replyrow.from.name}
+																span.text-info &nbsp;回复&nbsp;
+																|  #{replyrow.to.name} : 
+															p #{replyrow.content}
+									hr
+
+									script(src="/js/moviedetail.js")
+				//- 提交评论的表单
+				#commentsform
+					form#commentForm(method='POST',action='/user/comment')
+						input(type='hidden',name='comment[movie]',value="#{movie._id}")
+						textarea.form-control(name="comment[content]",rows="3",placeholder='提交评论信息')
+						if user
+							input(type='hidden',name='comment[from]',value="#{user._id}")
+							button.btn.btn-primary(type="submit") 提交
+						else
+							a.navbar-link(href="#",data-toggle='modal',data-target='#signinModal') 登录后评论
+
+			.col-md-4
+

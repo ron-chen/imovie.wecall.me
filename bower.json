@@ -25,6 +25,7 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "select2": "^4.0.1",
-    "bootstrapvalidator": "bootstrapValidator#^0.5.3"
+    "bootstrapvalidator": "bootstrapValidator#^0.5.3",
+    "masonry": "^4.0.0"
   }
 }

@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			.col-md-8
+				form(method='POST',action='/admin/country/add')
+					.modal-header 添加国家信息
+					.modal-body 
+						.form-group
+							label(for="country") 名称
+							input#country.form-control(name='country[name]',type='text')
+					.modal-footer
+						button.btn.btn-success(type='submit') 提交
+			

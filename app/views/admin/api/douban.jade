@@ -1,0 +1,59 @@
+extends ../../layout
+
+block content
+
+	.container
+		.row
+			.col-sm-2
+				ul.nav.nav-pills.nav-stacked
+					li.active(role='presentation')
+						a(href="#searchbox",aria-controls="searchbox",role="tab",data-toggle="tab") 搜索影院
+					li(role='presentation')
+						a#theaters(href="#in_theaters",aria-controls="in_theaters",role="tab",data-toggle="tab") 正在热映
+					li(role='presentation')
+						a#coming(href="#coming_soon",aria-controls="coming_soon",role="tab",data-toggle="tab") 即将上映
+					li(role='presentation')
+						a(href="#top250",aria-controls="top250",role="tab",data-toggle="tab") 排行(Top250)
+					li(role='presentation')
+						a(href="#weekly",aria-controls="weekly",role="tab",data-toggle="tab") 口碑榜
+					li(role='presentation')
+						a(href="#us_box",aria-controls="us_box",role="tab",data-toggle="tab") 北美票房榜
+					li(role='presentation')
+						a(href="#new_movies",aria-controls="new_movies",role="tab",data-toggle="tab") 新片榜
+			.col-sm-10
+				span#defaultcity(target="108288",page="1") 北京 &nbsp;
+				a.navbar-link(href="#",data-toggle='modal',data-target='#togglecityModal') 切换城市
+
+				.tab-content
+					.tab-pane.active#searchbox
+						h3 搜索影片
+					.tab-pane#in_theaters
+						h3 数据正在同步...
+					.tab-pane#coming_soon
+						h3 数据正在同步...
+					.tab-pane#top250
+						h3 数据正在同步...
+					.tab-pane#weekly
+						h3 数据正在同步...
+					.tab-pane#us_box
+						h3 数据正在同步...
+					.tab-pane#new_movies
+						h3 数据正在同步...
+
+	//- 切换城市
+	#togglecityModal.modal.fade
+		.modal-dialog
+			.modal-content
+				.modal-header 切换城市
+				.modal-body
+					div.btn-group.btn-group-justified(role="group",aria-label="Justified button group")
+						a.btn.btn-default.togglecity(href='#',role="button",data-uid="beijing",data-target='北京',data-id="108288") 北京
+						a.btn.btn-default.togglecity(href='#',role="button",data-uid="shanghai",data-target='上海',data-id="108296") 上海
+						a.btn.btn-default.togglecity(href='#',role="button",data-uid="guangzhou",data-target='广州',data-id="118281") 广州
+						a.btn.btn-default.togglecity(href='#',role="button",data-uid="shenzhen",data-target='深圳',data-id="118282") 深圳
+	
+	script(src="/js/apidouban.js")
+
+					
+					
+		

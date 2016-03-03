@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			.col-md-8
+				form(method='POST',action='/admin/format/add')
+					.modal-header 添加电影播放格式
+					.modal-body 
+						.form-group
+							label(for="format") 名称
+							input#format.form-control(name='format[name]',type='text')
+					.modal-footer
+						button.btn.btn-success(type='submit') 提交
+			

@@ -1,0 +1,29 @@
+extends ../../layout
+
+block content
+	.container
+		a.btn.btn-primary(href='/admin/language/new',alt="添加",title="添加")  添加
+		table.table.table-striped
+			thead
+				tr
+					th #
+					th 姓名
+					th 影片数量
+					th 修改
+					//- th 删除
+					
+			tbody
+				each item in languages
+					tr(class="item-id-#{item._id}")
+						th #{item._id}
+						td #{item.name}
+						td #{item.movies.length}
+						td 
+							a(target="_blank",href="/admin/language/edit/#{item._id}") 修改
+						//- td 
+						//- 	button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+
+
+
+
+		

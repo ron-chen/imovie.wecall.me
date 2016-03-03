@@ -1,0 +1,173 @@
+extends ../layout
+
+block content
+	.container
+		form#movieForm(method="post",action="/admin/movie/add")
+			input#movieId(type="hidden",name="movie[_id]",value=movie._id).form-control
+			//- 影片分类
+			fieldset
+				.form-group
+					.row
+						.col-md-8.col-sm-12
+							label.control-label 影片名称
+							input(type="text",name="movie[name]",value=movie.name).form-control
+						.col-md-4.col-sm-12
+							label.control-label 影片类型  
+							label.pull-right
+								a(href='/admin/category/new',alt="添加类型",title="添加类型") 添加类型
+							select.form-control(name="movie[category]",multiple="multiple",id="selCategory")
+								- var arrCateory = movie.category
+
+								each cate in categories
+									if arrCateory 
+										if arrCateory.indexOf(cate._id) >= 0
+											option(value=cate._id,selected="selected") #{cate.name}	
+										else
+											option(value=cate._id) #{cate.name}	
+									else
+										option(value=cate._id) #{cate.name}	
+			//- 涉及演员
+			fieldset
+				.form-group
+					.row
+						.col-sm-12.col-md-6
+							label.control-label 导演
+							input(type="text",name="movie[directors]",value=movie.directors).form-control
+						.col-sm-12.col-md-6
+							label.control-label 编剧
+							input(type="text",name="movie[writers]",value=movie.writers).form-control
+				.form-group
+					.row
+						.col-sm-12
+							label.control-label 主演
+							input(type="text",name="movie[actors]",value=movie.actors).form-control
+			//- 影片格式
+			fieldset
+				.form-group
+					.row
+						.col-sm-12.col-md-4
+							label.control-label 制片国家/地区
+							label.pull-right
+								a(href='/admin/country/new',alt="添加国家",title="添加国家") 添加国家
+							select.form-control(name="movie[country]",multiple="multiple",id="selCountry")
+								- var arrCountry = movie.country
+	
+								each row in countries
+									if arrCountry 
+										if arrCountry.indexOf(row._id) >= 0
+											option(value=row._id,selected="selected") #{row.name}	
+										else
+											option(value=row._id) #{row.name}
+									else
+										option(value=row._id) #{row.name}	
+								
+						.col-sm-12.col-md-4
+							label.control-label 语言 
+							label.pull-right
+								a(href='/admin/language/new',alt="添加语言",title="添加语言") 添加语言
+							select.form-control(name="movie[language]",multiple="multiple",id="selLanguage")
+								- var arrLanguage = movie.language
+	
+								each row in languages
+									if arrLanguage 
+										if arrLanguage.indexOf(row._id) >= 0
+											option(value=row._id,selected="selected") #{row.name}	
+										else
+											option(value=row._id) #{row.name}
+									else
+										option(value=row._id) #{row.name}
+								
+						.col-sm-12.col-md-4
+							label.control-label 影片效果
+							label.pull-right
+								a(href='/admin/format/new',alt="添加语言",title="添加语言") 添加效果
+							
+							select.form-control(name="movie[formats]",multiple="multiple",id="selformat")
+								- var arrFormat = movie.formats
+								each row in formats
+									if arrFormat 
+										if arrFormat.indexOf(row._id) >= 0
+											option(value=row._id,selected="selected") #{row.name}	
+										else
+											option(value=row._id) #{row.name}
+									else
+										option(value=row._id) #{row.name}
+			//- 基本其他信息
+			fieldset
+				.form-group
+					.row
+						.col-sm-12.col-md-4
+							label.control-label 影片时长:
+							div.input-group
+								input(type="text",aria-describedby='durationAddon',name="movie[duration]",value=movie.duration).form-control
+								span#durationAddon.input-group-addon 分钟
+
+						.col-sm-12.col-md-4
+							label.control-label 上映日期:
+							input(type="text",name="movie[showDate]",placeholder="####-##-##",value=movie.showDate).form-control
+
+						.col-sm-12.col-md-4
+							label.control-label 又名:
+							input(type="text",name="movie[alias]",value=movie.alias).form-control
+			
+			//- 图片上传
+			fieldset
+				.form-group
+					.row
+						.col-sm-12
+							label.control-label 海报[支持 "点击" 或者 "拖拽",一次可上传多张]:
+							input#stillfile(type='hidden',name='stillfiles',value=stillfiles)
+							div.dropzone#stilldropzone
+			
+			//- 视频上传
+			//- fieldset
+			//- 	.form-group
+			//- 		.row
+			//- 			.col-sm-12
+			//- 				label.control-label 预告片:
+			//- 				input(type="file",name="movie[prevueVideo]",value=movie.prevueVideo).form-control
+			
+			fieldset
+				.form-group
+					.row
+						.col-sm-12
+							label.control-label 宣传口号:
+							input(type="text",name="movie[summary]",value=movie.summary).form-control
+
+				.form-group
+					.row
+						.col-sm-12
+							label.control-label 剧情:
+							textarea(placeholder="影片相关故事",rows="4",name="movie[story]").form-control #{movie.story}
+
+				.form-group
+					.row
+						.col-sm-12
+							label.control-label 简介:
+							textarea(placeholder="影片背景介绍",rows="4",name="movie[introduction]").form-control #{movie.introduction}
+			//- 评分
+			fieldset
+				.form-group
+					.row
+						.col-sm-6
+							label.control-label 豆瓣评分:
+							div.input-group
+								input(type="text",aria-describedby='scoreAddon',name="movie[score]",value=movie.score).form-control
+								span#scoreAddon.input-group-addon 分
+						.col-sm-6
+							label.control-label 排序值: #{movie.iorder} / #{maxmovie.iorder} [ #{maxmovie.name}],浏览量: #{movie.pvcount}
+							input(type="text",name="movie[iorder]",value=movie.iorder).form-control
+			//- 排期链接
+			.form-group
+					.row
+						.col-sm-12
+							label.control-label 排期地址:
+							input(type="text",name="movie[schedule_url]",value=movie.schedule_url).form-control
+			.form-actions
+				.row
+					.col-sm-12
+						button(type="submit").btn.btn-default 确认添加
+
+			script(src="/js/movieform.js")
+			
+

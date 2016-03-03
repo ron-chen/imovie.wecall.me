@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			.col-md-8
+				form(method='POST',action='/admin/category/add')
+					.modal-header 添加电影分类
+					.modal-body 
+						.form-group
+							label(for="category") 名称
+							input#category.form-control(name='category[name]',type='text')
+					.modal-footer
+						button.btn.btn-success(type='submit') 提交
+			

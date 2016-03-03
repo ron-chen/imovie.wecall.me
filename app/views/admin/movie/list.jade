@@ -1,0 +1,42 @@
+extends ../layout
+
+block content
+	.container
+		a.btn.btn-primary(href='/admin/movie',alt="添加",title="添加")  添加
+		table.table.table-striped
+			thead
+				tr
+					th 浏览量
+					th 海报
+					th 名称
+					th 导演
+					th 类型
+					th 发行国家
+					th 上映时间
+					th 查看
+					th 更新
+					th 删除
+			tbody
+				each item in movies
+					tr(class="item-id-#{item._id}")
+						th #{item.pvcount}
+						td 
+							img(src="#{item.stills}",alt="#{item.name}",title="#{item.name}")
+						td #{item.name}
+						td #{item.directors}
+						td #{item.strcategary}
+						td #{item.strcountry}
+						td #{item.showDate}
+						td 
+							a(target="_blank",href="/movie/detail/#{item._id}") 查看
+						td 
+							a(target="_blank",href="/admin/movie/edit/#{item._id}") 修改
+						td 
+							button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+							<br/>
+							button.btn.btn-primary.syncmovie(type="button",data-source="#{item.source_id}",data-id="#{item._id}") 同步
+	
+	script(src="/js/movieadmin.js")
+
+
+		

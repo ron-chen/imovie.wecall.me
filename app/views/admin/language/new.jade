@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+	.container
+		.row
+			.col-md-8
+				form(method='POST',action='/admin/language/add')
+					.modal-header 添加语言信息
+					.modal-body 
+						.form-group
+							label(for="language") 名称
+							input#language.form-control(name='language[name]',type='text')
+					.modal-footer
+						button.btn.btn-success(type='submit') 提交
+			

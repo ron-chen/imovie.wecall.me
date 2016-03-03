@@ -1,0 +1,30 @@
+extends ../layout
+
+
+block content
+	.container
+		.row
+			.col-sm-12
+				#{title}
+		.row
+			.col-sm-12
+				ul.nav.nav-pills
+					li(role='presentation')
+						a(href="")
+							全部
+					each cateitem in categories
+						li(role='presentation')
+							a(href='#')	&nbsp; #{cateitem.name} &nbsp;
+								span.badge #{cateitem.movies.length}
+		.row
+			each mitem in movies
+				.col-sm-3
+					a(href="/movie/detail/#{mitem._id}").thumbnail
+						img(src=mitem.stills.key,alt=mitem.name)
+						h3 #{mitem.name}
+					
+			
+		script(src="/js/movieindex.js")
+
+
+				

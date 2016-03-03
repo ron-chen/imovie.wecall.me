@@ -2,7 +2,7 @@
 * @Author: Ron Chen
 * @Date:   2016-02-17 21:47:52
 * @Last Modified by:   Ron Chen
-* @Last Modified time: 2016-02-19 18:03:17
+* @Last Modified time: 2016-02-25 09:24:13
 */
 $(function(){
 	Dropzone.autoDiscover = false;
@@ -43,13 +43,27 @@ $(function(){
       		});
       		
       		this.on("success", function(file,data) {
-      			file._removeLink.id = data.id 
+      			file._removeLink.id = data.id
+      			
+      			// 添加海报的隐藏域
+      			if ($("#stillfile").length > 0) {
+      				var stillValue = $("#stillfile").val();
+      				$("#stillfile").val(stillValue + "," + data.id);
+				}else{
+					$('<input>').attr({
+						id    : "stillfile",
+						type  : 'hidden' ,
+						name  : "movie[still]",
+						value : data.id
+					}).appendTo("#movieForm");
+				}
+
 	        });
       		this.on("removedfile", function(file) {
       			var id = file._removeLink.id
 	            $.ajax({
 					type : 'DELETE',
-					url  : '/upload/del?id=' + id
+					url  : '/upload/still/del?id=' + id
 				})
 				.done(function(res){
 					if (res.success == 1) {
