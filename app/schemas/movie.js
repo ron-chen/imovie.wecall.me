@@ -60,7 +60,7 @@ var MovieSchema = new Schema({
 	stars        : String, 
 	schedule_url : String,
 	source_id    : String
-},{versionKey:'__someElse'});
+});
 
 MovieSchema.statics = {
 	fetch : function(cb){

@@ -68,7 +68,7 @@ exports.add = function(req,res){
 	}
 	
 	if (id) {
-		Movie.findOne(id,function(err,movie){
+		Movie.findById(id,function(err,movie){
 			if (err) {
 				console.log(err);
 			}

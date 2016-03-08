@@ -327,32 +327,3 @@ exports.subject = function(req,res){
     );
 }
 
-// 数据处理
-exports.theater = function(req,res){
-    var page  = req.query.page
-    var city  = req.query.city
-    
-    var count = 50
-    var start = 0 
-    if (page) {
-        start = (page - 1) * count + 1    
-    }
-    request.get(
-        {
-            url: DOUBANHOST + "/v2/movie/in_theaters?city='" + city + "'&start=" + start + "&count=" + count,
-            encoding:'utf8'
-        },
-        function(error, response, body){
-            if (response) {
-                 if(response.statusCode == 200){
-                    res.json(JSON.parse(body))
-                }else{
-                    console.log(response.statusCode);
-                }
-            }else{
-                res.json({title:"500",msg:"正在热映接口请求异常"});
-            }
-           
-        }
-    );
-}

@@ -94,7 +94,6 @@ module.exports = function(app){
 	*  豆瓣接口
 	*/
 	app.get("/admin/api/douban",User.signinRequired,User.adminRequired,Api.douban)
-	app.get("/admin/api/theater",User.signinRequired,User.adminRequired,Api.theater)
 	app.get("/admin/api/subject/:movieid",User.signinRequired,User.adminRequired,Api.subject)
 	
 }

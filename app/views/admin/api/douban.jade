@@ -13,7 +13,7 @@ block content
 					li(role='presentation')
 						a#coming(href="#coming_soon",aria-controls="coming_soon",role="tab",data-toggle="tab") 即将上映
 					li(role='presentation')
-						a(href="#top250",aria-controls="top250",role="tab",data-toggle="tab") 排行(Top250)
+						a#top(href="#top250",aria-controls="top250",role="tab",data-toggle="tab") 排行(Top250)
 					li(role='presentation')
 						a(href="#weekly",aria-controls="weekly",role="tab",data-toggle="tab") 口碑榜
 					li(role='presentation')
@@ -26,7 +26,16 @@ block content
 
 				.tab-content
 					.tab-pane.active#searchbox
-						h3 搜索影片
+						.row
+							.col-sm-12
+								.input-group
+									span.input-group-btn
+										button#btnSearch(class="btn btn-default",type="button") 搜索
+									input#inWord(type="text",class="form-control",placeholder="影片关键字...",name="keyword")
+						.row
+							.col-sm-12
+								#searchResult
+									h3 正在搜索...
 					.tab-pane#in_theaters
 						h3 数据正在同步...
 					.tab-pane#coming_soon
@@ -34,11 +43,11 @@ block content
 					.tab-pane#top250
 						h3 数据正在同步...
 					.tab-pane#weekly
-						h3 数据正在同步...
+						h3 高级接口需申请
 					.tab-pane#us_box
-						h3 数据正在同步...
+						h3 高级接口需申请
 					.tab-pane#new_movies
-						h3 数据正在同步...
+						h3 高级接口需申请
 
 	//- 切换城市
 	#togglecityModal.modal.fade

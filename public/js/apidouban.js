@@ -6,8 +6,9 @@
 */
 
 $(function(){
-	var ROW  = 45
-	var HOST = "https://api.douban.com/v2"
+	var ROW  = 45;
+	var HOST = "https://api.douban.com/v2";
+
 	// 切换城市
 	$(".togglecity").on("click",function(e){
 		var target = e.target
@@ -15,9 +16,31 @@ $(function(){
 		$('#togglecityModal').modal('hide');
 	})
 
+	// 影片搜索
+	$("#btnSearch").on('click',function(){
+		var text = $("#inWord").val()
+		console.log(text);
+		var URL   = HOST + "/movie/search";
+		$.ajax({
+			url: URL + "?q="+text,
+			cache: true,
+			type : 'get',
+			dataType : "jsonp",
+			crossDomain:true,
+			jsonp:'callback',
+			success:function(data){
+				// 加载模板
+				$("#searchResult").html(loadtemplate(data));
+				// 绑定同步事件
+				bindsyncmovie();
+				// 请求完成之后绑定事件
+				loadsurplus("coming_soon");
+			}
+		})
+	})
+
 	// 正在热映
 	$("#theaters").on('click',function(){
-		// get_in_theaters();
 		var city  = $("#defaultcity").attr("target");
 		var URL   = HOST + "/movie/in_theaters";
 		
@@ -40,8 +63,7 @@ $(function(){
 			}
 		})
 	});
-
-
+	
 	// 即将上映 的接口
 	$("#coming").on('click',function(){
 		var city  = $("#defaultcity").attr("target");
@@ -64,6 +86,26 @@ $(function(){
 		})
 	})
 
+	// top250
+	$("#top").on('click',function(){
+		var URL   = HOST + "/movie/top250";
+		$.ajax({
+			url: URL + "?start=0&count="+ROW,
+			cache: true,
+			type : 'get',
+			dataType : "jsonp",
+			crossDomain:true,
+			jsonp:'callback',
+			success:function(data){
+				// 加载模板
+				$("#top250").html(loadtemplate(data));
+				// 绑定同步事件
+				bindsyncmovie();
+				// 请求完成之后绑定事件
+				loadsurplus("top250");
+			}
+		})
+	})
 
 
 	// 绑定同步电影按钮
@@ -72,7 +114,6 @@ $(function(){
 			var syncmovie = $(e.target)
 			var _btn = syncmovie.button('...')
 			var movie_id  = syncmovie.attr('data-id');
-			var HOST  = "https://api.douban.com/v2/movie/subject/";
 
 			if (movie_id) {
 				$.ajax({
@@ -86,7 +127,6 @@ $(function(){
 			}else{
 				console.log("数据绑定错误")
 			}
-
 		})
 	}
 
@@ -112,32 +152,16 @@ $(function(){
 							$("#coming_soon").html(loadtemplate(data));
 							bindsyncmovie();
 							break;
+						case "top250":
+							$("#top250").html(loadtemplate(data));
+							bindsyncmovie();
 						default:
 							break;
 					}
 				}
 			})
 		})
-
 	}
-
-
-
-	// 请求正在热映接口
-	var get_in_theaters = function(){
-		var city = $("#defaultcity").attr("target");
-		var currentpage = $("#defaultcity").attr("page");
-
-		$.ajax({
-  			type: 'GET',
-  			url : '/admin/api/theater?city=' + city + '&page=' + currentpage ,
-  		})
-  		.done(function(data){
-  			// 加载渲染模板
-  			var htmldata = loadtemplate(data);
-  			$("#in_theaters").html(htmldata);
-  		});
-  	}
 
 	// 加载模板数据
 	function loadtemplate(data){
@@ -213,4 +237,5 @@ $(function(){
 
 		return template;
 	}
+
 })
